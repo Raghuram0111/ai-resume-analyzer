@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Resume Analyzer</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload Resume (PDF)</label>
+        <input type="file" name="resume" required>
+
+        <label>Paste Job Description</label>
+        <textarea name="jobdesc" rows="6" required></textarea>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+    {% if score is not none %}
+        <div class="result">
+            <h2>Match Score: {{score}}%</h2>
+
+            {% if score > 70 %}
+                <p class="good">Excellent match! ✅</p>
+            {% elif score > 40 %}
+                <p class="avg">Moderate match ⚠️</p>
+            {% else %}
+                <p class="bad">Low match ❌ Improve your resume</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
